@@ -645,6 +645,10 @@ export class AppComponent {
     ]),
     telefono: new FormControl(''),
     legajo: new FormControl(''),
+    nombretarjeta: new FormControl(''),
+    numerotarjeta: new FormControl('',[Validators.min(10000)]),
+    cvc: new FormControl(''),
+    vencimientotarjeta: new FormControl(''),
     cuotas: new FormControl('',[
       Validators.required,
     ]),
@@ -653,6 +657,9 @@ export class AppComponent {
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
   submited = false
+  mes
+  anio
+  
   constructor(private notificationService: NotificationService,private _snackBar: MatSnackBar){}
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges
@@ -688,12 +695,20 @@ export class AppComponent {
       if(item.cantidad >0 )
       itemstosend.push(item)
     });
-    if(itemstosend.length > 0 ){
+    if(this.anio == '0' || this.mes == '0'){
+      this.toast("Fecha de vencimiento de tarjeta invalida")
+  
+      console.log(this.ventaForm.value)
+    }
+    else{
 
-      this.notificationService.createRequest(this.ventaForm.value,itemstosend).subscribe(res => {
+    if(itemstosend.length > 0 ){
+ 
+      var vencimiento = this.mes+"/"+this.anio
+      this.submited = true
+      this.notificationService.createRequest(this.ventaForm.value,itemstosend,vencimiento).subscribe(res => {
         console.log(res)
         this.ventaForm.reset();
-        this.submited = true
         this.toast("Se ha enviado con exito el pedido!")
       }, error => {
         console.log(error)
@@ -704,6 +719,8 @@ export class AppComponent {
     else{
       this.toast("No hay ningun producto seleccionado!. Vuelva al paso 2")
     }
+  }
+
   }
   borrarDeLista(i){
     console.log(i)
@@ -718,5 +735,15 @@ export class AppComponent {
   }
   newRequest(){
     this.submited = false
+  }
+
+
+  openDatePicker(dp) {
+    dp.open();
+  }
+
+  closeDatePicker(eventData: any, dp?:any) {
+    // get month and year from eventData and close datepicker, thus not allowing user to select date
+    dp.close();    
   }
 }

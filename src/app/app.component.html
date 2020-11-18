@@ -94,6 +94,76 @@
               <mat-radio-button value="1">1 Cuota</mat-radio-button>
               <mat-radio-button value="12">12 Cuotas</mat-radio-button>
             </mat-radio-group>
+            <mat-form-field style="width: 100%;">
+              <mat-label>N° de tarjeta (16 dígitos)</mat-label>
+              <input matInput placeholder="" type="number" formControlName="numerotarjeta" required>
+            </mat-form-field>
+            <mat-form-field style="width: 100%;">
+              <mat-label>Nombre y apellido del titular de tarjeta</mat-label>
+              <input matInput placeholder="" type="text" formControlName="nombretarjeta" required>
+            </mat-form-field>
+            <!-- <mat-form-field style="width: 100%;">
+              <mat-label>Fecha de vencimiento (mm/aa)</mat-label>
+              <input  matInput id="expirationdate" type="text" pattern="[0-9]*"  formControlName="vencimientotarjeta" inputmode="numeric">
+            </mat-form-field> -->
+            <p>Selecciona una fecha de vencimiento</p>
+            <p>Fecha seleccionada: {{mes}}/{{anio}}</p>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Seleccione un mes</mat-label>
+              <mat-select [(value)]="mes" [ngModelOptions]="{standalone: true}">
+                <mat-option value="0" >sin seleccionar</mat-option>
+                <mat-option value="01">Enero</mat-option>
+                <mat-option value="02">Febrero</mat-option>
+                <mat-option value="03">Marzo</mat-option>
+                <mat-option value="04">Abril</mat-option>
+                <mat-option value="05">Mayo</mat-option>
+                <mat-option value="06">Junio</mat-option>
+                <mat-option value="07">Julio</mat-option>
+                <mat-option value="08">Agosto</mat-option>
+                <mat-option value="09">Septiembre</mat-option>
+                <mat-option value="10">Octubre</mat-option>
+                <mat-option value="11">Noviembre</mat-option>
+                <mat-option value="12">Diciembre</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Seleccione un año</mat-label>
+              <mat-select [(value)]="anio" [ngModelOptions]="{standalone: true}">
+                <mat-option value="0" >sin seleccionar</mat-option>
+                <mat-option value="20">2020</mat-option>
+                <mat-option value="22">2022</mat-option>
+                <mat-option value="23">2023</mat-option>
+                <mat-option value="24">2024</mat-option>
+                <mat-option value="25">2025</mat-option>
+                <mat-option value="26">2026</mat-option>
+                <mat-option value="27">2027</mat-option>
+                <mat-option value="28">2028</mat-option>
+                <mat-option value="29">2029</mat-option>
+                <mat-option value="30">2030</mat-option>
+                <mat-option value="31">2031</mat-option>
+                <mat-option value="32">2032</mat-option>
+                <mat-option value="33">2033</mat-option>
+                <mat-option value="34">2034</mat-option>
+                <mat-option value="35">2035</mat-option>
+                <mat-option value="36">2036</mat-option>
+                <mat-option value="37">2037</mat-option>
+                <mat-option value="38">2038</mat-option>
+                <mat-option value="39">2039</mat-option>
+                <mat-option value="40">2040</mat-option>
+      
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field style="width: 100%;">
+              <mat-label>Código de seguridad (CVC)</mat-label>
+              <input matInput placeholder="" type="number" formControlName="cvc" required>
+            </mat-form-field>
+            
+            <!-- <mat-form-field>
+              <input matInput [matDatepicker]="dp2" [min]="sixMonthsAgo" [max]="today" placeholder="Select a Date" (click)="openDatePicker(dp2)">
+              <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+              <mat-datepicker #dp2 startView="multi-year" (monthSelected)="closeDatePicker($event, dp2)"></mat-datepicker>
+            </mat-form-field> -->
             <p>Presione el boton de enviar para finalizar.</p>
             <div class="alert alert-warning"   *ngIf="!ventaForm.valid" role="alert">
               Por favor complete todos los campos incluyendo los de los pasos anteriores antes de enviar.
