@@ -154,6 +154,15 @@
               <input matInput placeholder="" type="number" formControlName="cvc" required>
             </mat-form-field> -->
             
+       
+            <div class="alert alert-info"  style="margin-top: 10px;"  *ngIf="!ventaForm.valid" role="alert">
+              <strong>
+            Antes de avanzar con el pago nos pondremos en contacto con vos para confirmar el producto y el precio final según la financiación que hayas elegido.
+
+
+              </strong>
+            </div>
+
             <div class="padding">
               <div class="row">
                   <div class="container-fluid d-flex justify-content-center">
@@ -184,8 +193,10 @@
                                     <mat-radio-button value="12">12 Cuotas</mat-radio-button>
                                   </mat-radio-group>
                                 </div>
-
                               </div>
+                                  <div class="alert alert-warning"   *ngIf="!ventaForm.valid" role="alert">
+                                    Por favor complete todos los campos incluyendo los de los pasos anteriores antes de enviar.
+                                  </div>
                           </div>
                       </div>
                   </div>
@@ -195,9 +206,6 @@
 
 
 
-            <div class="alert alert-warning"   *ngIf="!ventaForm.valid" role="alert">
-              Por favor complete todos los campos incluyendo los de los pasos anteriores antes de enviar.
-            </div>
            
 
 
