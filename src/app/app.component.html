@@ -90,26 +90,21 @@
           </mat-step>
           <mat-step>
             <ng-template matStepLabel>Informacion de pago</ng-template>
-            <mat-radio-group class="mt-5"  formControlName="cuotas" aria-label="Seleccione una opcion de pago">
-              <mat-radio-button value="1">1 Cuota</mat-radio-button>
-              <mat-radio-button value="12">12 Cuotas</mat-radio-button>
-            </mat-radio-group>
-            <mat-form-field style="width: 100%;">
+        
+
+            <!-- <mat-form-field style="width: 100%;">
               <mat-label>N° de tarjeta (16 dígitos)</mat-label>
               <input matInput placeholder="" type="number" formControlName="numerotarjeta" required>
             </mat-form-field>
             <mat-form-field style="width: 100%;">
               <mat-label>Nombre y apellido del titular de tarjeta</mat-label>
               <input matInput placeholder="" type="text" formControlName="nombretarjeta" required>
-            </mat-form-field>
-            <!-- <mat-form-field style="width: 100%;">
-              <mat-label>Fecha de vencimiento (mm/aa)</mat-label>
-              <input  matInput id="expirationdate" type="text" pattern="[0-9]*"  formControlName="vencimientotarjeta" inputmode="numeric">
             </mat-form-field> -->
-            <p>Selecciona una fecha de vencimiento</p>
-            <p>Fecha seleccionada: {{mes}}/{{anio}}</p>
+        
+            <!-- <p>Selecciona una fecha de vencimiento</p>
+            <p>Fecha seleccionada: {{mes}}/{{anio}}</p> -->
 
-            <mat-form-field appearance="fill">
+            <!-- <mat-form-field appearance="fill">
               <mat-label>Seleccione un mes</mat-label>
               <mat-select [(value)]="mes" [ngModelOptions]="{standalone: true}">
                 <mat-option value="0" >sin seleccionar</mat-option>
@@ -157,21 +152,63 @@
             <mat-form-field style="width: 100%;">
               <mat-label>Código de seguridad (CVC)</mat-label>
               <input matInput placeholder="" type="number" formControlName="cvc" required>
-            </mat-form-field>
-            
-            <!-- <mat-form-field>
-              <input matInput [matDatepicker]="dp2" [min]="sixMonthsAgo" [max]="today" placeholder="Select a Date" (click)="openDatePicker(dp2)">
-              <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
-              <mat-datepicker #dp2 startView="multi-year" (monthSelected)="closeDatePicker($event, dp2)"></mat-datepicker>
             </mat-form-field> -->
-            <p>Presione el boton de enviar para finalizar.</p>
+            
+            <div class="padding">
+              <div class="row">
+                  <div class="container-fluid d-flex justify-content-center">
+                      <div class="col-12">
+                          <div class="card">
+                              <div class="card-header">
+                                  <div class="row">
+                                      <div class="col-md-6"> <span>INFORMACION DE TARJETA</span> </div>
+                                      <div class="col-md-6 text-right" style="margin-top: -5px;"> <img src="https://img.icons8.com/color/36/000000/visa.png"> <img src="https://img.icons8.com/color/36/000000/mastercard.png"> <img src="https://img.icons8.com/color/36/000000/amex.png"> </div>
+                                  </div>
+                              </div>
+                              <div class="card-body" style="height: 350px">
+                                  <div class="form-group"> <label for="cc-number" class="control-label">NUMBERO DE TARJETA</label> <input  formControlName="numerotarjeta" id="cc-number" type="tel" class="input-lg form-control cc-number" autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required> </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="form-group"> <label for="cc-exp" class="control-label">FECHA DE VENCIMIENTO (MM/AA)</label> <input id="cc-exp" formControlName="vencimientotarjeta" type="tel" class="input-lg form-control cc-exp" autocomplete="cc-exp" placeholder="•• / ••" required> </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group"> <label for="cc-cvc" class="control-label">CÓDIGO DE SEGURIDAD (CVC)</label> <input id="cc-cvc" type="tel" formControlName="cvc" class="input-lg form-control cc-cvc" autocomplete="off" placeholder="••••" required> </div>
+                                      </div>
+                                  </div>
+                                  <div class="form-group"> <label for="numeric" class="control-label">NOMBRE DEL PORTADOR DE LA TARJETA</label> <input  formControlName="nombretarjeta" type="text" class="input-lg form-control"> </div>
+                                  <div class="form-group">
+
+                                  <mat-radio-group class="mt-5"  formControlName="cuotas" aria-label="Seleccione una opcion de pago">
+                                    <mat-label>Numero de Cuotas   </mat-label>
+                                    <mat-radio-button value="1">1 Cuota</mat-radio-button>
+                                    <mat-radio-button value="12">12 Cuotas</mat-radio-button>
+                                  </mat-radio-group>
+                                </div>
+
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+
+
             <div class="alert alert-warning"   *ngIf="!ventaForm.valid" role="alert">
               Por favor complete todos los campos incluyendo los de los pasos anteriores antes de enviar.
             </div>
            
+
+
+
+
+            
             <div>
               <button mat-button matStepperPrevious>Anterior</button>
               <button   mat-button type="submit" (click)="enviarFormulario()" [disabled]="!ventaForm.valid">Enviar</button>
+              <!-- <button   mat-button type="button" (click)="consleform()" >Enviar</button> -->
+              
             </div>
           </mat-step>
           </mat-horizontal-stepper>
@@ -199,6 +236,8 @@
         
         </mat-card>
       </form>
+
+      
 
     </div>
   </div>

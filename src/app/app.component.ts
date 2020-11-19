@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -645,8 +645,10 @@ export class AppComponent {
     ]),
     telefono: new FormControl(''),
     legajo: new FormControl(''),
-    nombretarjeta: new FormControl(''),
-    numerotarjeta: new FormControl('',[Validators.min(10000)]),
+    nombretarjeta: new FormControl('',[
+      Validators.required,
+    ]),
+    numerotarjeta: new FormControl(''),
     cvc: new FormControl(''),
     vencimientotarjeta: new FormControl(''),
     cuotas: new FormControl('',[
@@ -659,15 +661,17 @@ export class AppComponent {
   submited = false
   mes
   anio
-  
-  constructor(private notificationService: NotificationService,private _snackBar: MatSnackBar){}
+  form
+  constructor(private notificationService: NotificationService,private _snackBar: MatSnackBar,private fb: FormBuilder){}
   ngOnInit() {
+ 
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filter(value))
       );
   }
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
@@ -688,6 +692,11 @@ export class AppComponent {
     // this.myControl.reset()
 
   }
+  consleform(){
+    console.log(this.ventaForm)
+    console.log(this.ventaForm.value)
+    console.log(this.ventaForm.valid)
+  }
   enviarFormulario(){
     console.log(this.ventaForm.value)
     var itemstosend = []
@@ -695,18 +704,12 @@ export class AppComponent {
       if(item.cantidad >0 )
       itemstosend.push(item)
     });
-    if(this.anio == '0' || this.mes == '0'){
-      this.toast("Fecha de vencimiento de tarjeta invalida")
-  
-      console.log(this.ventaForm.value)
-    }
-    else{
 
     if(itemstosend.length > 0 ){
  
-      var vencimiento = this.mes+"/"+this.anio
+     
       this.submited = true
-      this.notificationService.createRequest(this.ventaForm.value,itemstosend,vencimiento).subscribe(res => {
+      this.notificationService.createRequest(this.ventaForm.value,itemstosend).subscribe(res => {
         console.log(res)
         this.ventaForm.reset();
         this.toast("Se ha enviado con exito el pedido!")
@@ -719,7 +722,7 @@ export class AppComponent {
     else{
       this.toast("No hay ningun producto seleccionado!. Vuelva al paso 2")
     }
-  }
+  
 
   }
   borrarDeLista(i){
